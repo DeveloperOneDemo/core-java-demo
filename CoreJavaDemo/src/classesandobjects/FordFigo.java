@@ -67,5 +67,7 @@ public class FordFigo {
 	void mannualBrakeSystem() {
 		System.out.println("Manual Brakes applied!");
 	}
+
+	
 	
 }
