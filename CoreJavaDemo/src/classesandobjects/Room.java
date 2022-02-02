@@ -46,6 +46,11 @@ public class Room {
 		return height * 2;
 	}
 	
+	@Override
+	public String toString() {
+		return "[length=" + length + ",breadth=" + breadth + "]";
+	}
+	
 }
 
 

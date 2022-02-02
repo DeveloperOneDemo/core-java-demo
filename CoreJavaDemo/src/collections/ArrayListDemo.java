@@ -28,6 +28,8 @@ public class ArrayListDemo {
 		Room room = new Room(200,300);
 		//Integer number = new Integer(10); // new Integer() is deprecated
 		Integer number = 10;
+		int data = 100;
+		double pi = 3.14;
 		
 		
 		// C - Create
@@ -36,6 +38,9 @@ public class ArrayListDemo {
 		myList.add(room);
 		myList.add(number);
 		myList.add(str1);
+		myList.add(data); // Auto boxing - primitive is automically coverted to its wrapper type 
+								// and vice versa
+		myList.add(pi);
 		
 		//R - Read
 		System.out.println(myList);

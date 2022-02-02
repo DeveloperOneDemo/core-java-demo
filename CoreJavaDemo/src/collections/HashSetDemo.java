@@ -3,6 +3,7 @@ package collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import classesandobjects.FordFigo;
 import classesandobjects.Room;
 
 public class HashSetDemo {
@@ -36,6 +37,11 @@ public class HashSetDemo {
 		// U - Update
 		
 		// D - Delete
+		
+			
+		Room room1 = new Room(500, 250);
+		System.out.println(room1);
+		
 		
 	}
 
