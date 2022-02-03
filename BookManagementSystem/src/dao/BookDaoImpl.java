@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import pojo.BookPojo;
@@ -25,7 +26,7 @@ public class BookDaoImpl implements BookDao {
 	public BookPojo addBook(BookPojo bookPojo) {
 		int newBookId = allBooks.get(allBooks.size()-1).getBookId() + 1;
 		
-		// breading down line 26
+		// breaking down line 26
 		//int lastIndex = allBooks.size()-1;
 		//BookPojo lastBook = allBooks.get(lastIndex);
 		//int lastBookId = lastBook.getBookId();
@@ -61,11 +62,30 @@ public class BookDaoImpl implements BookDao {
 	@Override
 	public BookPojo fetchABook(int bookId) {
 		BookPojo returnBookPojo = null;
-		for(int i=0; i<allBooks.size(); i++) {
-			if(allBooks.get(i).getBookId() == bookId) {
-				returnBookPojo = allBooks.get(i);
+		
+		//iterrating an ArrayList using for loop
+//		for(int i=0; i<allBooks.size(); i++) {
+//			if(allBooks.get(i).getBookId() == bookId) {
+//				returnBookPojo = allBooks.get(i);
+//			}
+//		}
+		
+		//iterrating an ArrayList using using Iterator
+		Iterator<BookPojo> itr = allBooks.iterator();
+		while(itr.hasNext()) {
+			BookPojo book = itr.next();
+			if(book.getBookId() == bookId) {
+				returnBookPojo = book;
 			}
 		}
+		
+		
+		//iterating an ArrayList using enhanced for loop
+		
+		
+		//iterating an ArrayList using forEach with functional interfaces - most frequently used
+		
+		
 		return returnBookPojo;
 	}
 

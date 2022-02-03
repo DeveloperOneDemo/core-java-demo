@@ -72,9 +72,6 @@ public class BookPojo {
 		this.bookImageUrl = bookImageUrl;
 	}
 
-	@Override
-	public String toString() {
-		return "BookPojo [bookId=" + bookId + ", bookTitle=" + bookTitle + ", bookAuthor=" + bookAuthor + ", bookGenre="
-				+ bookGenre + ", bookCost=" + bookCost + ", bookImageUrl=" + bookImageUrl + "]";
-	}
+	
+	
 }

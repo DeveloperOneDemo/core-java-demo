@@ -1,6 +1,7 @@
 package classesandobjects;
 
-public class Room {
+//implements Comparable Interface so that we can add this object to a TreeSet
+public class Room implements Comparable{
 	//public int length;
 	int length;
 	int breadth;
@@ -49,6 +50,20 @@ public class Room {
 	@Override
 	public String toString() {
 		return "[length=" + length + ",breadth=" + breadth + "]";
+	}
+
+	//returns three possible value
+	// positive number - current object is greater than the object parameter
+	// zero -  both objects are equal
+	// negative number - current object is lesser than the object parameter
+	
+	@Override
+	public int compareTo(Object o) {
+		int currentFA = length * breadth;
+		Room incoming = (Room) o;
+		int incomingFA = incoming.length * incoming.breadth;
+		
+		return currentFA - incomingFA;
 	}
 	
 }
