@@ -8,6 +8,19 @@ public class FordFigo {
 	private String carType;
 	private String carName;
 	
+	public FordFigo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public FordFigo(int modelNo, String color, String carType, String carName) {
+		super();
+		this.modelNo = modelNo;
+		this.color = color;
+		this.carType = carType;
+		this.carName = carName;
+	}
+
 	//getter for modelNo
 	public int getModelNo() {
 		return modelNo;
@@ -66,6 +79,11 @@ public class FordFigo {
 	
 	void mannualBrakeSystem() {
 		System.out.println("Manual Brakes applied!");
+	}
+
+	@Override
+	public String toString() {
+		return "FordFigo [modelNo=" + modelNo + ", color=" + color + "]";
 	}
 
 	
