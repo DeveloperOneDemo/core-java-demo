@@ -1,5 +1,7 @@
 package collections;
 
+//import java.util.*; - not recomended
+
 import java.util.ArrayList;
 import java.util.List;
 

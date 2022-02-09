@@ -1,5 +1,7 @@
 package functionalinterfaces;
 
+import java.io.FileNotFoundException;
+
 @FunctionalInterface
 public interface Operation {
 	// methods by default in an interface are public and abstract

@@ -67,24 +67,39 @@ public class BookDaoImpl implements BookDao {
 //		for(int i=0; i<allBooks.size(); i++) {
 //			if(allBooks.get(i).getBookId() == bookId) {
 //				returnBookPojo = allBooks.get(i);
+//				break;
 //			}
 //		}
 		
 		//iterrating an ArrayList using using Iterator
-		Iterator<BookPojo> itr = allBooks.iterator();
-		while(itr.hasNext()) {
-			BookPojo book = itr.next();
-			if(book.getBookId() == bookId) {
-				returnBookPojo = book;
-			}
-		}
+//		Iterator<BookPojo> itr = allBooks.iterator();
+//		while(itr.hasNext()) {
+//			BookPojo book = itr.next();
+//			if(book.getBookId() == bookId) {
+//				returnBookPojo = book;
+//				break;
+//			}
+//		}
 		
 		
 		//iterating an ArrayList using enhanced for loop
-		
-		
+//		for(BookPojo book : allBooks) {
+//			if(book.getBookId() == bookId) {
+//				returnBookPojo = book;
+//				break;
+//			}
+//		}
+	
 		//iterating an ArrayList using forEach with functional interfaces - most frequently used
+		List<BookPojo> allReturnBook = new ArrayList<BookPojo>(allBooks);
+		allReturnBook.removeIf((book)->book.getBookId()!=bookId);
+		if(allReturnBook.size() == 1) {
+			returnBookPojo = allReturnBook.get(0);
+		}
 		
+		
+		//iterating an ArrayList using Streams forEach with functional interfaces - most frequently used
+		//allBooks.stream().filter((book)->book.getBookId()!=bookId);
 		
 		return returnBookPojo;
 	}
