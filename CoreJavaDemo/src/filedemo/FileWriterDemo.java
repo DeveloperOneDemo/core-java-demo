@@ -8,6 +8,7 @@ public class FileWriterDemo {
 	public static void main(String[] args) {
 		
 		try {
+			
 			FileWriter fw = new FileWriter("Output.txt");
 			
 			fw.write("Hi this is writtern into the file through java program.");
