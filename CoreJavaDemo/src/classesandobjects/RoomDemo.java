@@ -33,7 +33,14 @@ public class RoomDemo {
 				// gets created
 		System.out.println("Double room height:" + Room.computeDoubleHeight());
 		
-		Room room3 = new Room(400, 200, 101, "red");
+			
+		Room room3 = new Room(300, 150);
+		System.out.println("room1 == room2 :" + (room1 == room2));
+		System.out.println("room2 == room3 :" + (room2 == room3));
+		System.out.println("room3 == room1 :" + (room3 == room1));
+		System.out.println("room1.equals(room2) : " + room1.equals(room2));
+		System.out.println("room2.equals(room3) : " + room2.equals(room3));
+		System.out.println("room3.equals(room1) : " + room3.equals(room1));
 	}
 
 }

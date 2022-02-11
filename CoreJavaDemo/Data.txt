@@ -1,0 +1,2 @@
+This test is present in data.txt file.
+Hello everyone!! How are you doing?

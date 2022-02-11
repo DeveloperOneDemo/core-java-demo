@@ -18,6 +18,7 @@ public class PrintRequestThread implements Runnable{
 		
 		// explore synchronized block which can be used here
 		printer.print(msg);
+		
 	}
 
 	
