@@ -5,6 +5,8 @@ import java.util.List;
 import dao.BookDao;
 import dao.BookDaoImpl;
 import dao.BookJdbcDaoImpl;
+import exception.BooksNotFoundException;
+import exception.SystemException;
 import pojo.BookPojo;
 
 public class BookServiceImpl implements BookService {
@@ -17,28 +19,33 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<BookPojo> fetchAllBooks() {
+	public List<BookPojo> fetchAllBooks()throws SystemException, BooksNotFoundException {
 		return bookDao.fetchAllBooks();
 	}
 
 	@Override
-	public BookPojo addBook(BookPojo bookPojo) {
+	public BookPojo addBook(BookPojo bookPojo)throws SystemException {
 		return bookDao.addBook(bookPojo);
 	}
 
 	@Override
-	public BookPojo updateBook(BookPojo bookPojo) {
+	public BookPojo updateBook(BookPojo bookPojo)throws SystemException {
 		return bookDao.updateBook(bookPojo);
 	}
 
 	@Override
-	public BookPojo deleteBook(int bookId) {
+	public BookPojo deleteBook(int bookId)throws SystemException {
 		return bookDao.deleteBook(bookId);
 	}
 
 	@Override
-	public BookPojo fetchABook(int bookId) {
+	public BookPojo fetchABook(int bookId)throws SystemException {
 		return bookDao.fetchABook(bookId);
+	}
+
+	@Override
+	public void exitApplication()throws SystemException {
+		bookDao.exitApplication();
 	}
 
 }

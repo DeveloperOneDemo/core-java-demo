@@ -7,12 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.BooksNotFoundException;
+import exception.SystemException;
 import pojo.BookPojo;
 
 public class BookJdbcDaoImpl implements BookDao {
 
 	@Override
-	public List<BookPojo> fetchAllBooks() {
+	public List<BookPojo> fetchAllBooks()throws SystemException, BooksNotFoundException {
 
 		// create an array list to hold all the book info fetched from the DB
 		List<BookPojo> allBooks = new ArrayList<BookPojo>();
@@ -30,14 +32,18 @@ public class BookJdbcDaoImpl implements BookDao {
 				allBooks.add(bookPojo);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SystemException();
 		}
+		if(allBooks.isEmpty()) {
+			throw new BooksNotFoundException();
+		}
+		
 		// return the collection
 		return allBooks;
 	}
 
 	@Override
-	public BookPojo addBook(BookPojo bookPojo) {
+	public BookPojo addBook(BookPojo bookPojo)throws SystemException {
 		Connection conn = DBUtil.obtainConnection();
 		try {
 			Statement stmt = conn.createStatement();
@@ -53,28 +59,28 @@ public class BookJdbcDaoImpl implements BookDao {
 			int rows = stmt.executeUpdate(query2);
 			bookPojo.setBookId(newBookId);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SystemException();
 		}
 		
 		return bookPojo;
 	}
 
 	@Override
-	public BookPojo updateBook(BookPojo bookPojo) {
+	public BookPojo updateBook(BookPojo bookPojo)throws SystemException {
 		Connection conn = DBUtil.obtainConnection();
 		try {
 			Statement stmt = conn.createStatement();
 			String query = "UPDATE book_details SET book_cost="+bookPojo.getBookCost()+" WHERE book_id="+bookPojo.getBookId();
 			int rows = stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SystemException();
 		}
 		
 		return bookPojo;
 	}
 
 	@Override
-	public BookPojo deleteBook(int bookId) {
+	public BookPojo deleteBook(int bookId)throws SystemException {
 		
 		BookPojo bookPojo = null;
 		Connection conn = DBUtil.obtainConnection();
@@ -84,14 +90,14 @@ public class BookJdbcDaoImpl implements BookDao {
 			String query = "DELETE FROM book_details WHERE book_id="+bookId;
 			int rows = stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SystemException();
 		}
 		
 		return bookPojo;
 	}
 
 	@Override
-	public BookPojo fetchABook(int bookId) {
+	public BookPojo fetchABook(int bookId)throws SystemException {
 		
 		BookPojo bookPojo = null;
 		Connection conn = DBUtil.obtainConnection();
@@ -104,7 +110,7 @@ public class BookJdbcDaoImpl implements BookDao {
 				bookPojo = new BookPojo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SystemException();
 		}
 		
 		return bookPojo;

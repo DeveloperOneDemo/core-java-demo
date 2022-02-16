@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import exception.SystemException;
+
 public class DBUtil {
 
 	static Connection conn;
@@ -18,7 +20,7 @@ public class DBUtil {
 		}
 	}
 	
-	static Connection obtainConnection(){
+	static Connection obtainConnection()throws SystemException{
 		
 		// design pattern - singleton design pattern
 		
@@ -31,11 +33,18 @@ public class DBUtil {
 			try {
 				conn = DriverManager.getConnection(connectionUrl, userName, password);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SystemException();
 			}	
 		}
 		
 		return conn;
+	}
+	
+	static void closeConnection()throws SystemException {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			throw new SystemException();
+		}
 	}
 }
