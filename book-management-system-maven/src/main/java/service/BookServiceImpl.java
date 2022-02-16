@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.BookDao;
 import dao.BookDaoImpl;
+import dao.BookJdbcDaoImpl;
 import pojo.BookPojo;
 
 public class BookServiceImpl implements BookService {
@@ -11,7 +12,8 @@ public class BookServiceImpl implements BookService {
 	BookDao bookDao;
 	
 	public BookServiceImpl() {
-		bookDao = new BookDaoImpl();
+		//bookDao = new BookDaoImpl();
+		bookDao = new BookJdbcDaoImpl();
 	}
 
 	@Override
