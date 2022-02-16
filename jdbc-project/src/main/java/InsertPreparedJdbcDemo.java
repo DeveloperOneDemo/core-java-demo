@@ -31,7 +31,7 @@ public class InsertPreparedJdbcDemo {
 					}
 					
 					//step 3
-//					Statement stmt = conn.createStatement();
+//					Statement stmt = conn.createStatement(); // no hit to DB
 //					int studId = 108;
 //					String studName = "VBN";
 //					String studCity = "St.Louis";
@@ -41,12 +41,11 @@ public class InsertPreparedJdbcDemo {
 //					String query = "insert into student_details values("+studId+",'"+studName+"',"+studContact+","+studMark+",'"+studCity+"')";
 //					System.out.println(query);
 //					
-//					int rows = stmt.executeUpdate(query); // for DML
-					
+//					int rows = stmt.executeUpdate(query); // for DML // 1 Hit to DB, 1 C and 1 E
 //					System.out.println(rows + " row(s) affected...");
 					
 					String query = "insert into student_details values(?,?,?,?,?)";					
-					PreparedStatement psmt = conn.prepareStatement(query);
+					PreparedStatement psmt = conn.prepareStatement(query); // 1 Hit to DB, 1 C
 					
 					psmt.setInt(1, 112);
 					psmt.setString(2, "JKL");
@@ -54,9 +53,13 @@ public class InsertPreparedJdbcDemo {
 					psmt.setInt(4, 45);
 					psmt.setString(5, "St.Louis");
 					
-					int row = psmt.executeUpdate();
+					int row = psmt.executeUpdate(); // 1 Hit to DB, 1 E
 					
 					System.out.println(row + " row(s) affected...");
+					
+					// need to execute 100 insert queries
+					// Statement - 100 H, 100 C, 100 E
+					// PreparedStatement - 101 H, 1 C, 100 E
 					
 				} catch (SQLException e) {
 					//step 4
