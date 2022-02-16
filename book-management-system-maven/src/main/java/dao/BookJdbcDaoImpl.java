@@ -7,15 +7,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import exception.BooksNotFoundException;
 import exception.SystemException;
 import pojo.BookPojo;
 
 public class BookJdbcDaoImpl implements BookDao {
 
+	public static final Logger LOG = LogManager.getLogger(BookJdbcDaoImpl.class);
+	
 	@Override
 	public List<BookPojo> fetchAllBooks()throws SystemException, BooksNotFoundException {
-
+		LOG.info("Entered fetchAllBooks() in DAO");
 		// create an array list to hold all the book info fetched from the DB
 		List<BookPojo> allBooks = new ArrayList<BookPojo>();
 		Connection conn = DBUtil.obtainConnection();
@@ -38,12 +43,14 @@ public class BookJdbcDaoImpl implements BookDao {
 			throw new BooksNotFoundException();
 		}
 		
+		LOG.info("Exited fetchAllBooks() in DAO");
 		// return the collection
 		return allBooks;
 	}
 
 	@Override
 	public BookPojo addBook(BookPojo bookPojo)throws SystemException {
+		LOG.info("Entered addBook() in DAO");
 		Connection conn = DBUtil.obtainConnection();
 		try {
 			Statement stmt = conn.createStatement();
@@ -61,12 +68,13 @@ public class BookJdbcDaoImpl implements BookDao {
 		} catch (SQLException e) {
 			throw new SystemException();
 		}
-		
+		LOG.info("Exited addBook() in DAO");
 		return bookPojo;
 	}
 
 	@Override
 	public BookPojo updateBook(BookPojo bookPojo)throws SystemException {
+		LOG.info("Entered updateBook() in DAO");
 		Connection conn = DBUtil.obtainConnection();
 		try {
 			Statement stmt = conn.createStatement();
@@ -75,13 +83,13 @@ public class BookJdbcDaoImpl implements BookDao {
 		} catch (SQLException e) {
 			throw new SystemException();
 		}
-		
+		LOG.info("Exited updateBook() in DAO");
 		return bookPojo;
 	}
 
 	@Override
 	public BookPojo deleteBook(int bookId)throws SystemException {
-		
+		LOG.info("Entered deleteBook() in DAO");
 		BookPojo bookPojo = null;
 		Connection conn = DBUtil.obtainConnection();
 		try {
@@ -92,13 +100,13 @@ public class BookJdbcDaoImpl implements BookDao {
 		} catch (SQLException e) {
 			throw new SystemException();
 		}
-		
+		LOG.info("Exited deleteBook() in DAO");
 		return bookPojo;
 	}
 
 	@Override
 	public BookPojo fetchABook(int bookId)throws SystemException {
-		
+		LOG.info("Entered fetchABook() in DAO");
 		BookPojo bookPojo = null;
 		Connection conn = DBUtil.obtainConnection();
 		
@@ -112,7 +120,7 @@ public class BookJdbcDaoImpl implements BookDao {
 		} catch (SQLException e) {
 			throw new SystemException();
 		}
-		
+		LOG.info("Exited fetchABook() in DAO");
 		return bookPojo;
 	}
 

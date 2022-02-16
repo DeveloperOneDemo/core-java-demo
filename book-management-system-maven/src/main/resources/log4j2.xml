@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <RollingFile name="RollingfileAppender"
+          fileName="target/logfile.txt"
+          filePattern="target/logfile-%d{yyyy-MM-dd}-%i.log.gz">
+            
+            <Policies>
+                <SizeBasedTriggeringPolicy size="17 kB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="XML_ROLLING_FILE_APPENDER" 
+       level="INFO" additivity="false">
+            <AppenderRef ref="RollingfileAppender" />
+        </Logger>
+        <Root level="TRACE">
+            <AppenderRef ref="ConsoleAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

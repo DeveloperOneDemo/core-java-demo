@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import exception.BooksNotFoundException;
 import exception.SystemException;
 import pojo.BookPojo;
@@ -12,6 +15,8 @@ import service.BookServiceImpl;
 
 public class BookMain {
 
+	public static final Logger LOG = LogManager.getLogger(BookMain.class);
+	
 	public static void main(String[] args) {
 		
 		BookService bookService = new BookServiceImpl();
@@ -50,6 +55,7 @@ public class BookMain {
 						addedBook = bookService.addBook(newBook);
 						System.out.println("Book Added Successfully!!\nYour new Book ID is " + addedBook.getBookId());
 					} catch (SystemException e) {
+						LOG.error(e);
 						System.out.println(e.getMessage());
 					}
 					break;
@@ -75,6 +81,7 @@ public class BookMain {
 						bookService.updateBook(fetchedOldBook);
 						System.out.println("Book Updated Successfully!!");
 					} catch (SystemException e) {
+						LOG.error(e);
 						System.out.println(e.getMessage());
 					}
 					
@@ -105,6 +112,7 @@ public class BookMain {
 						}
 						
 					} catch (SystemException e) {
+						LOG.error(e);
 						System.out.println(e.getMessage());
 					}
 					
@@ -123,8 +131,10 @@ public class BookMain {
 						}
 						System.out.println("**************************************************************************************");
 					} catch (SystemException e) {
+						LOG.error(e);
 						System.out.println(e.getMessage());
 					} catch (BooksNotFoundException e) {
+						LOG.error(e);
 						System.out.println(e.getMessage());
 					}
 					
@@ -137,6 +147,7 @@ public class BookMain {
 					try {
 						bookService.exitApplication();
 					} catch (SystemException e) {
+						LOG.error(e);
 						System.out.println(e.getMessage());
 					}
 					System.exit(0);
