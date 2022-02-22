@@ -54,6 +54,8 @@ public class BookJdbcDaoImpl implements BookDao {
 		Connection conn = DBUtil.obtainConnection();
 		try {
 			Statement stmt = conn.createStatement();
+			// commented to work with identity in DB
+			/*
 			int lastBookId = 0;
 			String query1 = "SELECT MAX(book_id) FROM book_details";
 			ResultSet rs = stmt.executeQuery(query1);
@@ -63,8 +65,16 @@ public class BookJdbcDaoImpl implements BookDao {
 			int newBookId = lastBookId + 1;
 			
 			String query2 = "INSERT INTO book_details VALUES("+newBookId+",'"+bookPojo.getBookTitle()+"','"+bookPojo.getBookAuthor()+"','"+bookPojo.getBookGenre()+"',"+bookPojo.getBookCost()+",'"+bookPojo.getBookImageUrl()+"')";
-			int rows = stmt.executeUpdate(query2);
-			bookPojo.setBookId(newBookId);
+			*/
+			
+			String query2 = "INSERT INTO book_details(book_title, book_author, book_genre, book_cost, book_image_url) VALUES('"+bookPojo.getBookTitle()+"','"+bookPojo.getBookAuthor()+"','"+bookPojo.getBookGenre()+"',"+bookPojo.getBookCost()+",'"+bookPojo.getBookImageUrl()+"') RETURNING book_id";
+			//int rows = stmt.executeUpdate(query2);
+			
+			ResultSet rs = stmt.executeQuery(query2);
+			if(rs.next()) {
+				bookPojo.setBookId(rs.getInt(1));
+			}
+			
 		} catch (SQLException e) {
 			throw new SystemException();
 		}
