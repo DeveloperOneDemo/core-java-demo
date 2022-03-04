@@ -1,5 +1,10 @@
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import exception.BooksNotFoundException;
+import exception.SystemException;
 import io.javalin.Javalin;
 import pojo.BookPojo;
 import service.BookService;
@@ -10,7 +15,8 @@ public class BookMain {
 	public static void main(String[] args) {
 		
 		BookService bookService = new BookServiceImpl();
-		Javalin myServer = Javalin.create().start(4040);
+		
+		Javalin myServer = Javalin.create((config)-> config.enableCorsForAllOrigins()).start(4040);
 		
 		System.out.println("Server listening at port 4040...");
 
@@ -78,6 +84,20 @@ public class BookMain {
 			ctx.json(deletedBook);
 		});
 		
+		// this is the catch block for SystemException
+		myServer.exception(SystemException.class,(se, ctx)->{
+			Map<String, String> error = new HashMap<String, String>();
+			error.put("message", se.getMessage());
+			error.put("datetime", LocalDateTime.now()+"");
+			ctx.json(error);
+		} );
+		
+		myServer.exception(BooksNotFoundException.class,(be, ctx)->{
+			Map<String, String> error = new HashMap<String, String>();
+			error.put("message", be.getMessage());
+			error.put("datetime", LocalDateTime.now()+"");
+			ctx.json(error);
+		} );
 	}
 
 }
