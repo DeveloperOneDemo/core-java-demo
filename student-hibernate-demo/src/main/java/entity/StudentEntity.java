@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="student_details")
+@Table(name="student_details") // optional
 public class StudentEntity {
 
 	@Id
-	@Column(name="student_id")
+	@Column(name="student_id") // optional if property name and column name are the same, recomended to use even if they are same
 	private int studentId;
 	
 	@Column(name="student_name")
@@ -22,6 +22,7 @@ public class StudentEntity {
 	@Column(name="student_mark")
 	private int studentMark;
 
+	// mandatory as the framework has to create an obj of your entity
 	public StudentEntity() {
 		
 	}
