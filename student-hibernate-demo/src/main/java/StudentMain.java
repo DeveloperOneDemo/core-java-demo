@@ -19,8 +19,8 @@ public class StudentMain {
 		Transaction transaction = session.beginTransaction();
 		
 		// 4) perform the dml operation
-		StudentEntity student = new StudentEntity(103, "ACV", "Marietta", 90);
-		session.save(student); // insert query is not exwecuted here
+		StudentEntity student = new StudentEntity(103, "ACV", "Marietta", 90); // here student is in transient state
+		session.save(student); // insert query is not exwecuted here // now student persistant state
 		System.out.println("Student saved....");
 		
 		// 5) commit the transaction - the sql query is executed
@@ -28,7 +28,7 @@ public class StudentMain {
 		System.out.println("transaction committed....");
 		
 		// 6) close the session
-		session.close();
+		session.close(); // here student object will come to detached state
 		System.out.println("Session closed.....");
 		
 		

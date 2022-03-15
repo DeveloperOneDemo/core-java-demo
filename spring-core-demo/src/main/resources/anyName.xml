@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myUser" class="com.beans.User">  
+    
+    	<!-- constructor injection -->
+        <!-- <constructor-arg index="0" value="888"></constructor-arg>
+        <constructor-arg index="1" value="Smith"></constructor-arg>
+        <constructor-arg index="2" ref="address"></constructor-arg> -->
+        
+        <!-- setter injection -->
+        <property name="userId" value="888"></property>
+        <property name="userName" value="Smith"></property>
+        <property name="address" ref="address"></property>
+    </bean>
+
+
+ 	<bean id="address" class="com.beans.Address">
+ 		<!-- constructor injection -->  
+        <!-- <constructor-arg index="0" value="JKL"></constructor-arg>
+        <constructor-arg index="1" value="66666"></constructor-arg> -->
+        
+        <!--setter injection  -->
+        <property name="street1" value="JKL"></property>
+        <property name="zipcode" value="66666"></property>
+    </bean>
+</beans>
