@@ -18,7 +18,7 @@
     </bean>
 
 
- 	<bean id="address" class="com.beans.Address">
+ 	<bean id="address" class="com.beans.Address" scope="protoype">
  		<!-- constructor injection -->  
         <!-- <constructor-arg index="0" value="JKL"></constructor-arg>
         <constructor-arg index="1" value="66666"></constructor-arg> -->
