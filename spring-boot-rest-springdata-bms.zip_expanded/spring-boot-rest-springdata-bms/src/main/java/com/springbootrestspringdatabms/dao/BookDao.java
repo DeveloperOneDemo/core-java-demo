@@ -12,4 +12,9 @@ import com.springbootrestspringdatabms.pojo.BookPojo;
 
 @Repository
 public interface BookDao extends JpaRepository<BookEntity, Integer>{
+	
+	// create finder methods here
+	
+	//select * from book_details where book_genre='Comedy';
+	List<BookEntity> findByBookGenre(String bookGenre);
 }
