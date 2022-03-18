@@ -1,6 +1,9 @@
 package com.bms.springbootresthibernatebms.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,8 +17,17 @@ public class BookHibernateDaoImpl implements BookDao{
 
 	@Override
 	public List<BookPojo> fetchAllBooks() throws SystemException, BooksNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		List<BookPojo> allBookPojo = new ArrayList<BookPojo>();
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("FROM BookEntity");
+		List<BookEntity> allBookEntity = query.getResultList();
+		//copying collection of entity into collection of pojo
+		for(BookEntity bookEntity: allBookEntity) {
+			BookPojo bookPojo = new BookPojo(bookEntity.getBookId(), bookEntity.getBookTitle(), bookEntity.getBookAuthor(), bookEntity.getBookGenre(), bookEntity.getBookCost(), bookEntity.getBookImageUrl());
+			allBookPojo.add(bookPojo);
+		}
+		return allBookPojo;
 	}
 
 	@Override
@@ -25,7 +37,8 @@ public class BookHibernateDaoImpl implements BookDao{
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
-		bookEntity = (BookEntity) session.save(bookEntity);
+		session.save(bookEntity);
+		session.flush();
 		System.out.println(bookEntity);
 		transaction.commit();	
 		
